@@ -40,9 +40,9 @@ zmsg_t *utils_gen_msg(const char *device_id, const char *msgid, const char *msg,
     zframe_t *frame = zframe_new (bytes, len);
     zmsg_push(answer, frame);
   }
-  zmsg_pushstr(answer, "%s", msg);
-  zmsg_pushstr(answer, "%s", msgid);
-  zmsg_pushstr(answer, "%s", device_id);
+  zmsg_pushstrf(answer, "%s", msg);
+  zmsg_pushstrf(answer, "%s", msgid);
+  zmsg_pushstrf(answer, "%s", device_id);
   return answer;
 }
 

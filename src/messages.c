@@ -88,30 +88,30 @@ zmsg_t *messages_parse_result2msg(char *device_id, int code, char *msgid, zmsg_t
     case MSG_ANSWER_UNREADABLE:
       {
         answer = zmsg_dup(original);
-        zmsg_pushstr(answer, "%s", MSG_ANSWER_STR_UNREADABLE);
-        zmsg_pushstr(answer, "%s", "");
-        zmsg_pushstr(answer, "%s", device_id);
+        zmsg_pushstrf(answer, "%s", MSG_ANSWER_STR_UNREADABLE);
+        zmsg_pushstrf(answer, "%s", "");
+        zmsg_pushstrf(answer, "%s", device_id);
       } break;
     case MSG_ANSWER_PARSEERROR:
       {
         answer = zmsg_dup(original);
-        zmsg_pushstr(answer, "%s", MSG_ANSWER_STR_PARSEERROR);
-        zmsg_pushstr(answer, "%s", msgid);
-        zmsg_pushstr(answer, "%s", device_id);
+        zmsg_pushstrf(answer, "%s", MSG_ANSWER_STR_PARSEERROR);
+        zmsg_pushstrf(answer, "%s", msgid);
+        zmsg_pushstrf(answer, "%s", device_id);
       } break;
     case MSG_ANSWER_BADCRC:
       {
         answer = zmsg_dup(original);
-        zmsg_pushstr(answer, "%s", MSG_ANSWER_STR_BADCRC);
-        zmsg_pushstr(answer, "%s", msgid);
-        zmsg_pushstr(answer, "%s", device_id);
+        zmsg_pushstrf(answer, "%s", MSG_ANSWER_STR_BADCRC);
+        zmsg_pushstrf(answer, "%s", msgid);
+        zmsg_pushstrf(answer, "%s", device_id);
       } break;
     case MSG_ANSWER_ACCEPTED:
       {
         answer = zmsg_new();
-        zmsg_pushstr(answer, "%s", MSG_ANSWER_STR_ACCEPTED);
-        zmsg_pushstr(answer, "%s", msgid);
-        zmsg_pushstr(answer, "%s", device_id);
+        zmsg_pushstrf(answer, "%s", MSG_ANSWER_STR_ACCEPTED);
+        zmsg_pushstrf(answer, "%s", msgid);
+        zmsg_pushstrf(answer, "%s", device_id);
       } break;
   }
 
@@ -129,37 +129,37 @@ zmsg_t *messages_exec_result2msg(char *device_id, int code, char *msgid)
 		case MSG_ANSWER_EXECERROR:
 			{
 				answer = zmsg_new();
-				zmsg_pushstr(answer, "%s", MSG_ANSWER_STR_EXECERROR);
-				zmsg_pushstr(answer, "%s", msgid);
-				zmsg_pushstr(answer, "%s", device_id);
+				zmsg_pushstrf(answer, "%s", MSG_ANSWER_STR_EXECERROR);
+				zmsg_pushstrf(answer, "%s", msgid);
+				zmsg_pushstrf(answer, "%s", device_id);
 			} break;
 		case MSG_ANSWER_PARSEERROR:
 			{
 				answer = zmsg_new();
-				zmsg_pushstr(answer, "%s", MSG_ANSWER_STR_PARSEERROR);
-				zmsg_pushstr(answer, "%s", msgid);
-				zmsg_pushstr(answer, "%s", device_id);
+				zmsg_pushstrf(answer, "%s", MSG_ANSWER_STR_PARSEERROR);
+				zmsg_pushstrf(answer, "%s", msgid);
+				zmsg_pushstrf(answer, "%s", device_id);
 			} break;
 		case MSG_ANSWER_UNDEFERROR:
 			{
 				answer = zmsg_new();
-				zmsg_pushstr(answer, "%s", MSG_ANSWER_STR_UNDEFERROR);
-				zmsg_pushstr(answer, "%s", msgid);
-				zmsg_pushstr(answer, "%s", device_id);
+				zmsg_pushstrf(answer, "%s", MSG_ANSWER_STR_UNDEFERROR);
+				zmsg_pushstrf(answer, "%s", msgid);
+				zmsg_pushstrf(answer, "%s", device_id);
 			} break;
 		case MSG_ANSWER_TASK:
 			{
 				answer = zmsg_new();
-				zmsg_pushstr(answer, "%s", MSG_ANSWER_STR_TASK);
-				zmsg_pushstr(answer, "%s", msgid);
-				zmsg_pushstr(answer, "%s", device_id);
+				zmsg_pushstrf(answer, "%s", MSG_ANSWER_STR_TASK);
+				zmsg_pushstrf(answer, "%s", msgid);
+				zmsg_pushstrf(answer, "%s", device_id);
 			} break;
 		case MSG_ANSWER_COMPLETED:
 			{
 				answer = zmsg_new();
-				zmsg_pushstr(answer, "%s", MSG_ANSWER_STR_COMPLETED);
-				zmsg_pushstr(answer, "%s", msgid);
-				zmsg_pushstr(answer, "%s", device_id);
+				zmsg_pushstrf(answer, "%s", MSG_ANSWER_STR_COMPLETED);
+				zmsg_pushstrf(answer, "%s", msgid);
+				zmsg_pushstrf(answer, "%s", device_id);
 			} break;
 		default:
 			break;

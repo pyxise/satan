@@ -248,9 +248,9 @@ static int s_process_message(char *msgid, uint8_t command, zmsg_t *arguments)
           zmsg_t *msg = zmsg_new();
           zframe_t *frame = zframe_new(&pid, sizeof(pid_t));
           zmsg_push(msg, frame);
-          zmsg_pushstr(msg, "%s", cmd);
-          zmsg_pushstr(msg, "%s", msgid);
-          zmsg_pushstr(msg, "%s", MSG_INTERNAL);
+          zmsg_pushstrf(msg, "%s", cmd);
+          zmsg_pushstrf(msg, "%s", msgid);
+          zmsg_pushstrf(msg, "%s", MSG_INTERNAL);
           zmsg_send(&msg, internal_pipe);
           ret = MSG_ANSWER_TASK;
         }
@@ -271,9 +271,9 @@ static void s_check_children_termination(zlist_t *processlist, char *device_id, 
     // TODO make this act on THREADS
     if (waitpid(item->pid, &status, WNOHANG) != 0) {
       zmsg_t *answer = zmsg_new();
-      zmsg_pushstr(answer, "%s", MSG_ANSWER_STR_COMPLETED);
-      zmsg_pushstr(answer, "%s", item->message_id);
-      zmsg_pushstr(answer, "%s", device_id);
+      zmsg_pushstrf(answer, "%s", MSG_ANSWER_STR_COMPLETED);
+      zmsg_pushstrf(answer, "%s", item->message_id);
+      zmsg_pushstrf(answer, "%s", device_id);
       zmsg_send(&answer, socket);
       free(item->message_id);
       free(item->command);
@@ -372,7 +372,7 @@ int main(int argc, char *argv[])
     if (zsocket_poll(command_socket, 0)) {
       zmsg_t *message = zmsg_recv (command_socket);
       if (message != NULL){
-        zmsg_pushstr (message, MSG_SERVER);
+        zmsg_pushstrf (message, MSG_SERVER);
         zmsg_send (&message, internal_pipe);
       }
     }
