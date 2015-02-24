@@ -29,7 +29,7 @@ void zeromq_send_data(void *socket, char *identity, uint8_t *data, int size)
 
   zmsg_t *msg = zmsg_new();
 
-  zmsg_addstr (msg, "%s", identity);
+  zmsg_addstrf (msg, "%s", identity);
   zframe_t *frame = zframe_new (data, size);
   zmsg_add (msg, frame);
 
